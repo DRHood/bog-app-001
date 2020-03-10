@@ -24,4 +24,18 @@ creatureRouter.post('/', (req, res) => {
   });
 });
 
+// Update one
+creatureRouter.put('/:creatureId', (req, res) => {
+  Creature.findByIdAndUpdate(req.params.id).then(() => {
+    res.json();
+  });
+});
+
+// Delete one
+creatureRouter.delete('/:creatureId', (req, res) => {
+  Creature.findByIdAndRemove(req.params.id).then(() => {
+    res.json();
+  });
+});
+
 module.exports = {creatureRouter};
