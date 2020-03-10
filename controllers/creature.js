@@ -1,11 +1,18 @@
-const express = require('express')
-const creatures = require('../models/creature.js')
+const express = require('express');
+const Creature = require('../models/creature.js');
 
-const creatureRouter = express.Router()
+const creatureRouter = express.Router();
 
 creatureRouter.get('/', (req, res) => {
-  res.json('hello world')
-})
+  Creature.find().then((creatures) => {
+    res.json();
+  });
+});
 
+creatureRouter.get('/:id', (req, res) =>{
+  Creature.findById(req.params.id).then(() => {
+    res.json();
+  });
+});
 
-module.exports = {creatureRouter}
+module.exports = {creatureRouter};
