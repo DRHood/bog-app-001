@@ -6,35 +6,35 @@ const creatureRouter = express.Router();
 // Get all
 creatureRouter.get('/', (req, res) => {
   Creature.find().then((creatures) => {
-    res.json();
+    res.json(creatures);
   });
 });
 
 // Get one
 creatureRouter.get('/:creatureId', (req, res) => {
-  Creature.findById(req.params.id).then(() => {
-    res.json();
+  Creature.findById(req.params.creatureId).then((creature) => {
+    res.json(creature);
   });
 });
 
 // Create one
 creatureRouter.post('/', (req, res) => {
-  Creature.create(req.body).then(() => {
-    res.json();
+  Creature.create(req.body).then((creature) => {
+    res.json(creature);
   });
 });
 
 // Update one
 creatureRouter.put('/:creatureId', (req, res) => {
-  Creature.findByIdAndUpdate(req.params.id).then(() => {
-    res.json();
+  Creature.findByIdAndUpdate(req.params.creatureId).then((creature) => {
+    res.json(creature);
   });
 });
 
 // Delete one
 creatureRouter.delete('/:creatureId', (req, res) => {
-  Creature.findByIdAndRemove(req.params.id).then(() => {
-    res.json();
+  Creature.findByIdAndRemove(req.params.creatureId).then((creature) => {
+    res.json(creature);
   });
 });
 
