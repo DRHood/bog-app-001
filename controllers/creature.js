@@ -19,8 +19,8 @@ creatureRouter.get('/:creatureId', (req, res) => {
 
 // Create one
 creatureRouter.post('/', (req, res) => {
-  Creature.create(req.body).then((creature) => {
-    res.json(creature);
+  Creature.create(req.body).then(() => {
+    res.json('ok');
   });
 });
 
