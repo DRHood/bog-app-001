@@ -1,21 +1,22 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Creatures from './components/Creatures'
-import SingleCreature from './components/SingleCreature'
+const express = require('express')
+const app = express()
 
-class App extends Component {
-  render () {
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/" component={Creatures}/>
-            <Route path="/:creatureId" component={SingleCreature}/>
-          </Switch>
-        </div>
-      </Router>
-    )
-  }
-}
+const { creatureRouter } = require('./controllers/creature.js')
 
-export default App
+app.use(express.urlencoded({extended: true}))
+
+app.use(express.json())
+
+app.use(express.static(`${__dirname}/client/build`))
+
+app.use('/api/creatures', creatureRouter)
+
+app.get('/*', (req, res) => {
+    res.sendFile(`${__dirname}/client/build/index.html`)
+})
+
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, () => {
+    console.log(`App is listening on PORT ${PORT}`)
+})
