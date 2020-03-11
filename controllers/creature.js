@@ -21,12 +21,13 @@ creatureRouter.get('/:creatureId', (req, res) => {
 creatureRouter.post('/', (req, res) => {
   Creature.create(req.body).then(() => {
     res.json('ok');
+    res.status(200).end();
   });
 });
 
 // Update one
 creatureRouter.put('/:creatureId', (req, res) => {
-  Creature.findByIdAndUpdate(req.params.creatureId).then((creature) => {
+  Creature.findByIdAndUpdate(req.params.creatureId, req.body).then((creature) => {
     res.json(creature);
   });
 });
@@ -35,6 +36,7 @@ creatureRouter.put('/:creatureId', (req, res) => {
 creatureRouter.delete('/:creatureId', (req, res) => {
   Creature.findByIdAndRemove(req.params.creatureId).then((creature) => {
     res.json(creature);
+    res.status(200).end();
   });
 });
 
