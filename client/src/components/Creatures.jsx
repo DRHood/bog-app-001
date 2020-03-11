@@ -54,9 +54,48 @@ export default class Creatures extends Component {
     }
 
     render() {
+        let creatures = this.state.creatures.map((creature) => {
+            return (
+                <div>
+                    <Link to={`/creatures/${creature._id}`}>{creature.name}</Link>
+                </div>
+            )
+        })
+
         return (
             <div>
-                
+                <h1>Creatures</h1>
+                <div>
+                    <button onClick={this.handleToggleNewForm}>Add New Creature</button>
+                </div>
+
+                {
+                    this.state.isNewFormDisplayed
+                        ? <form onSubmit={this.handleSubmit}>
+                        <div>
+                            <label htmlFor="creature-name">Creature Name</label>
+                            <input  
+                                type="text"
+                                name="name"
+                                id="creature-name"
+                                value={this.state.newCreature.name}
+                                onChange={this.handleNewFormChange}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="creature-description">Creature Description</label>
+                            <input
+                                type="text"
+                                name="description"
+                                id="creature-description"
+                                value={this.state.newCreature.description}
+                                onChange={this.handleNewFormChange}
+                            />
+                        </div>
+                        <input type="submit" value="Create Creature" />
+                    </form>
+                    : creatures
+                }
             </div>
         )
     }
