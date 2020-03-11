@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import HelloWorld from './components/HelloWorld.js'
+import Creatures from './components/Creatures'
+import Creature from './components/Creature'
 import './App.css';
 
 function App() {
