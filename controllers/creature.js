@@ -29,6 +29,7 @@ creatureRouter.post('/', (req, res) => {
 creatureRouter.put('/:creatureId', (req, res) => {
   Creature.findByIdAndUpdate(req.params.creatureId, req.body).then((creature) => {
     res.json(creature);
+    res.status(200).end();
   });
 });
 
