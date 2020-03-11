@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class Creatures extends Component {
 
@@ -10,12 +10,8 @@ export default class Creatures extends Component {
             name: '',
             description: ''
         },
-        isNewFormDisplayed: false
+        displayNewForm: false
     }
-
-    componentDidMount() {
-        this.getAllCreatures()
-     }
 
      getAllCreatures = () => {
         axios.get('/api/creatures')
@@ -23,7 +19,11 @@ export default class Creatures extends Component {
                 this.setState({creatures: res.data})
             })
     }
-
+    
+    componentDidMount() {
+        this.getAllCreatures()
+    }
+    
     handleNewFormChange = (event) => {
         const copiedCreature = {...this.state.newCreature}
         copiedCreature[event.target.name] = event.target.value
@@ -38,7 +38,7 @@ export default class Creatures extends Component {
             .then(() => {
                 this.getAllCreatures()
                 this.setState({
-                    isNewFormDisplayed: false,
+                    displayNewForm: false,
                     newCreature: {
                         name: '',
                         description: ''
@@ -49,7 +49,7 @@ export default class Creatures extends Component {
 
     handleToggleNewForm = () => {
         this.setState((state) => {
-            return {isNewFormDisplayed: !state.isNewFormDisplayed}
+            return {displayNewForm: !state.displayNewForm}
         })
     }
 
@@ -70,7 +70,7 @@ export default class Creatures extends Component {
                 </div>
 
                 {
-                    this.state.isNewFormDisplayed
+                    this.state.displayNewForm
                         ? <form onSubmit={this.handleSubmit}>
                         <div>
                             <label htmlFor="creature-name">Creature Name</label>
